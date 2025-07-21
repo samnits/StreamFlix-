@@ -1,0 +1,21 @@
+https://robohash.org/23.png?set=set4&size=150x150
+
+this website can also be used to generate the random avtar
+
+
+S C:\Users\saksh\Desktop\STREAMIFY> openssl rand -base64 32
+jFnrLYo5HQp0wX9WKlj8dDintpw3NUL3rJdaHazHXgY=
+
+this can be used to create random keys that make your program more secure 
+
+
+we made account at stream.io for the functions of streaminig and all
+
+
+
+-> daisyUI
+-> TailwindCSS
+->useQuery -> tanstack -> this send request three more times , but this  was not the case with use effect
+
+-> npm i lucide-react for ship like logo
+//zuzstand for theme selection

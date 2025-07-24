@@ -64,3 +64,11 @@ export async function getStreamToken() {
   const response = await axiosInstance.get("/chat/token");
   return response.data;
 }
+
+
+export const searchUserByEmail = async (email) => {
+  const response = await axiosInstance.get(`/users/search`, {
+    params: { email },
+  });
+  return response.data;
+};

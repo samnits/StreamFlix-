@@ -12,6 +12,7 @@ import FriendCard, { getLanguageFlag } from "../components/FriendCard";
 import NoFriendsFound from '../components/NoFriendsFound';
 import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import { searchUserByEmail } from "../lib/api";
+import AvatarImage from "../components/AvatarImage";
 
 
 const HomePage = () => {
@@ -121,9 +122,13 @@ const {
       <div className="card bg-base-200 hover:shadow-lg transition-all duration-300">
         <div className="card-body p-5 space-y-4">
           <div className="flex items-center gap-3">
-            <div className="avatar size-16 rounded-full">
-              <img src={userResult.profilePic} alt={userResult.fullName} />
-            </div>
+            <AvatarImage
+              src={userResult.profilePic}
+              alt={userResult.fullName}
+              name={userResult.fullName}
+              className="avatar size-16 rounded-full"
+              imgClassName="w-16 h-16 rounded-full object-cover"
+            />
             <div>
               <h3 className="font-semibold text-lg">{userResult.fullName}</h3>
               {userResult.location && (

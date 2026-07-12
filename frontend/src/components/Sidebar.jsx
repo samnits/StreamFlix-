@@ -2,6 +2,7 @@ import React from 'react'
 import useAuthUser from '../hooks/useAuthUser'
 import { Link, useLocation } from "react-router";
 import { BellIcon, HomeIcon, ShipWheelIcon, UsersIcon } from "lucide-react";
+import AvatarImage from './AvatarImage';
 
 function Sidebar() {
     const {authUser}=useAuthUser();
@@ -54,11 +55,13 @@ function Sidebar() {
       {/* mt-auto push the section to the very bottom of the page  */}
       <div className="p-4 border-t border-base-300 mt-auto">
         <div className="flex items-center gap-3">
-          <div className="avatar">
-            <div className="w-10 rounded-full">
-              <img src={authUser?.profilePic} alt="User Avatar" />
-            </div>
-          </div>
+          <AvatarImage
+            src={authUser?.profilePic}
+            alt="User Avatar"
+            name={authUser?.fullName}
+            className="avatar"
+            imgClassName="w-10 h-10 rounded-full object-cover"
+          />
           <div className="flex-1">
             <p className="font-semibold text-sm">{authUser?.fullName}</p>
             <p className="text-xs text-success flex items-center gap-1">

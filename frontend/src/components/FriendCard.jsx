@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { LANGUAGE_TO_FLAG } from "../constants";
+import AvatarImage from "./AvatarImage";
 
 const FriendCard = ({ friend }) => {
   return (
@@ -7,9 +8,13 @@ const FriendCard = ({ friend }) => {
       <div className="card-body p-4">
         {/* USER INFO */}
         <div className="flex items-center gap-3 mb-3">
-          <div className="avatar size-12">
-            <img src={friend.profilePic} alt={friend.fullName} />
-          </div>
+          <AvatarImage
+            src={friend.profilePic}
+            alt={friend.fullName}
+            name={friend.fullName}
+            className="avatar size-12"
+            imgClassName="w-12 h-12 rounded-full object-cover"
+          />
           <h3 className="font-semibold truncate">{friend.fullName}</h3>
         </div>
 

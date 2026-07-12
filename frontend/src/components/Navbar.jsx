@@ -3,6 +3,7 @@ import useAuthUser from "../hooks/useAuthUser";
 import { BellIcon, LogOutIcon, ShipWheelIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import useLogout from "../hooks/useLogout";
+import AvatarImage from "./AvatarImage";
 
 const Navbar = () => {
   const { authUser } = useAuthUser();
@@ -44,11 +45,13 @@ const Navbar = () => {
           {/* TODO */}
           <ThemeSelector />
 
-          <div className="avatar">
-            <div className="w-9 rounded-full">
-              <img src={authUser?.profilePic} alt="User Avatar" rel="noreferrer" />
-            </div>
-          </div>
+          <AvatarImage
+            src={authUser?.profilePic}
+            alt="User Avatar"
+            name={authUser?.fullName}
+            className="avatar"
+            imgClassName="w-9 h-9 rounded-full object-cover"
+          />
 
           {/* Logout button */}
           <button className="btn btn-ghost btn-circle" onClick={logoutMutation}>

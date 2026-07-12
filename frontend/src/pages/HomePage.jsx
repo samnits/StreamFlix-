@@ -13,6 +13,7 @@ import NoFriendsFound from '../components/NoFriendsFound';
 import { CheckCircleIcon, MapPinIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 import { searchUserByEmail } from "../lib/api";
 import AvatarImage from "../components/AvatarImage";
+import RecommendedUserCard from "../components/RecommendedUserCard";
 
 
 const HomePage = () => {
@@ -111,7 +112,7 @@ const {
         Search
       </button>
     </div>
-  </div>
+    </div>
 
   {isFetching ? (
     <div className="flex justify-center py-12">
@@ -176,6 +177,40 @@ const {
       </div>
     </div>
   ) : null}
+</section>
+
+<section className="mt-10">
+  <div className="flex items-center justify-between gap-4 mb-4">
+    <div>
+      <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">People You May Want to Follow</h2>
+      <p className="opacity-70 mt-1">Suggested language partners based on your current network</p>
+    </div>
+  </div>
+
+  {loadingUsers ? (
+    <div className="flex justify-center py-12">
+      <span className="loading loading-spinner loading-lg" />
+    </div>
+  ) : recommendedUsers.length === 0 ? (
+    <div className="card bg-base-200 p-6 text-center border border-base-300/50">
+      <h3 className="font-semibold text-lg mb-2">No recommendations right now</h3>
+      <p className="text-base-content opacity-70">
+        Once more users join and complete onboarding, we’ll show fresh suggestions here.
+      </p>
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {recommendedUsers.slice(0, 8).map((user) => (
+        <RecommendedUserCard
+          key={user._id}
+          user={user}
+          onSendRequest={sendRequestMutation}
+          isRequestSent={outgoingRequestsIds.has(user._id)}
+          isPending={isPending}
+        />
+      ))}
+    </div>
+  )}
 </section>
     </div>
   )

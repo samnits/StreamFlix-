@@ -1,20 +1,40 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const buildFallbackAvatar = (name = "User") => {
-  const safeName = encodeURIComponent(name || "User");
-  return `https://ui-avatars.com/api/?name=${safeName}&background=222831&color=ffffff&bold=true`;
+const getInitials = (name = "User") => {
+  const normalized = (name || "User").trim();
+  if (!normalized) return "U";
+
+  return normalized
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() || "")
+    .join("") || "U";
 };
 
 const AvatarImage = ({ src, alt, name, className = "", imgClassName = "" }) => {
-  const [imageSrc, setImageSrc] = useState(src || buildFallbackAvatar(name || alt));
+  const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [src]);
+
+  const initials = useMemo(() => getInitials(name || alt), [name, alt]);
+
+  if (!src || imageFailed) {
+    return (
+      <div className={`${className} bg-primary/20 text-primary flex items-center justify-center font-bold uppercase overflow-hidden`}>
+        <span className="select-none">{initials}</span>
+      </div>
+    );
+  }
 
   return (
     <div className={className}>
       <img
-        src={imageSrc}
+        src={src}
         alt={alt || name || "User avatar"}
         className={imgClassName}
-        onError={() => setImageSrc(buildFallbackAvatar(name || alt))}
+        onError={() => setImageFailed(true)}
       />
     </div>
   );
